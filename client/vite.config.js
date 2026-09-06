@@ -38,6 +38,7 @@ const createEjsTemplate = () => ({
 
 // https://vitejs.dev/config/
 export default defineConfig({
+  cacheDir: 'node_modules/.vite-local',
   base: './',
   plugins: [
     commonjs(),

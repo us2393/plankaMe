@@ -48,6 +48,8 @@ export default class extends BaseModel {
   static modelName = 'List';
 
   static fields = {
+    columnId: attr(),
+    columnPosition: attr(),
     id: attr(),
     type: attr(),
     position: attr(),

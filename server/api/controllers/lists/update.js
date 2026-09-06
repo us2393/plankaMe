@@ -103,6 +103,16 @@ module.exports = {
       type: 'number',
       min: 0,
     },
+    columnId: {
+      type: 'string',
+      isNotEmptyString: true,
+      allowNull: true,
+    },
+    columnPosition: {
+      type: 'number',
+      min: 0,
+      allowNull: true,
+    },
     name: {
       type: 'string',
       isNotEmptyString: true,
@@ -176,7 +186,14 @@ module.exports = {
       }
     }
 
-    const values = _.pick(inputs, ['type', 'position', 'name', 'color']);
+    const values = _.pick(inputs, [
+      'type',
+      'position',
+      'columnId',
+      'columnPosition',
+      'name',
+      'color',
+    ]);
 
     list = await sails.helpers.lists.updateOne.with({
       project,

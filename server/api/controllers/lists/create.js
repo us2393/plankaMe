@@ -95,6 +95,16 @@ module.exports = {
       min: 0,
       required: true,
     },
+    columnId: {
+      type: 'string',
+      isNotEmptyString: true,
+      allowNull: true,
+    },
+    columnPosition: {
+      type: 'number',
+      min: 0,
+      allowNull: true,
+    },
     name: {
       type: 'string',
       maxLength: 128,
@@ -131,7 +141,7 @@ module.exports = {
       throw Errors.NOT_ENOUGH_RIGHTS;
     }
 
-    const values = _.pick(inputs, ['type', 'position', 'name']);
+    const values = _.pick(inputs, ['type', 'position', 'columnId', 'columnPosition', 'name']);
 
     const list = await sails.helpers.lists.createOne.with({
       project,

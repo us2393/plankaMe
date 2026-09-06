@@ -34,11 +34,13 @@ const handleListUpdate = (list) => ({
   },
 });
 
-const moveList = (id, index) => ({
+const moveList = (id, index, columnId, columnPosition) => ({
   type: EntryActionTypes.LIST_MOVE,
   payload: {
     id,
     index,
+    columnId,
+    columnPosition,
   },
 });
 

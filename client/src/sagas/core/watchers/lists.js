@@ -22,8 +22,8 @@ export default function* listsWatchers() {
     takeEvery(EntryActionTypes.LIST_UPDATE_HANDLE, ({ payload: { list } }) =>
       services.handleListUpdate(list),
     ),
-    takeEvery(EntryActionTypes.LIST_MOVE, ({ payload: { id, index } }) =>
-      services.moveList(id, index),
+    takeEvery(EntryActionTypes.LIST_MOVE, ({ payload: { id, index, columnId, columnPosition } }) =>
+      services.moveList(id, index, columnId, columnPosition),
     ),
     takeEvery(EntryActionTypes.LIST_TRANSFER, ({ payload: { id, boardId, index } }) =>
       services.transferList(id, boardId, index),

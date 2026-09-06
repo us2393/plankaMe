@@ -16,10 +16,12 @@ import ToastTypes from '../../../constants/ToastTypes';
 
 export function* createList(boardId, data) {
   const localId = yield call(createLocalId);
+  const position = yield select(selectors.selectNextListPosition, boardId);
 
   const nextData = {
     ...data,
-    position: yield select(selectors.selectNextListPosition, boardId),
+    position,
+    columnPosition: position,
   };
 
   yield put(
@@ -133,12 +135,14 @@ export function* handleListUpdate(list) {
   }
 }
 
-export function* moveList(id, index) {
+export function* moveList(id, index, columnId, columnPosition) {
   const { boardId } = yield select(selectors.selectListById, id);
-  const position = yield select(selectors.selectNextListPosition, boardId, index, id);
+  const position = yield select(selectors.selectNextListPosition, boardId, index, id, columnId);
 
   yield call(updateList, id, {
     position,
+    columnId,
+    columnPosition,
   });
 }
 

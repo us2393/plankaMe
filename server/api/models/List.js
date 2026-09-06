@@ -130,6 +130,16 @@ module.exports = {
     //  ╠═╝╠╦╝║║║║║ ║ ║╚╗╔╝║╣ ╚═╗
     //  ╩  ╩╚═╩╩ ╩╩ ╩ ╩ ╚╝ ╚═╝╚═╝
 
+    columnId: {
+      type: 'string',
+      allowNull: true,
+      columnName: 'column_id',
+    },
+    columnPosition: {
+      type: 'number',
+      allowNull: true,
+      columnName: 'column_position',
+    },
     type: {
       type: 'string',
       isIn: Object.values(Types),

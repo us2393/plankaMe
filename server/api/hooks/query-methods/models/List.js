@@ -16,7 +16,10 @@ const createOne = (values) => List.create({ ...values }).fetch();
 
 const getByIds = (ids) => defaultFind(ids);
 
-const getByBoardId = (boardId, { exceptIdOrIds, typeOrTypes, sort = ['position', 'id'] } = {}) => {
+const getByBoardId = (
+  boardId,
+  { exceptIdOrIds, typeOrTypes, sort = ['columnPosition', 'columnId', 'position', 'id'] } = {},
+) => {
   const criteria = {
     boardId,
   };

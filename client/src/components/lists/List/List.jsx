@@ -40,7 +40,7 @@ const INDEX_BY_ADD_CARD_POSITION = {
   [AddCardPositions.TOP]: 0,
 };
 
-const List = React.memo(({ id, index }) => {
+const List = React.memo(({ id, index, previewOffset = null }) => {
   const selectListById = useMemo(() => selectors.makeSelectListById(), []);
 
   const selectFilteredCardIdsByListId = useMemo(
@@ -187,11 +187,20 @@ const List = React.memo(({ id, index }) => {
       index={index}
       isDragDisabled={!list.isPersisted || !canEdit || isEditNameOpened}
     >
-      {({ innerRef, draggableProps, dragHandleProps }) => (
+      {({ innerRef, draggableProps, dragHandleProps }, { isDragging }) => (
         <div
           {...draggableProps} // eslint-disable-line react/jsx-props-no-spreading
           data-drag-scroller
           ref={innerRef}
+          style={
+            previewOffset && !isDragging
+              ? {
+                  ...draggableProps.style,
+                  transform: `translate(${previewOffset.x}px, ${previewOffset.y}px)`,
+                  transition: 'transform 150ms ease-out',
+                }
+              : draggableProps.style
+          }
           className={styles.innerWrapper}
           onMouseEnter={handleMouseEnter}
           onMouseLeave={handleListMouseLeave}
@@ -296,6 +305,14 @@ const List = React.memo(({ id, index }) => {
 List.propTypes = {
   id: PropTypes.string.isRequired,
   index: PropTypes.number.isRequired,
+  previewOffset: PropTypes.shape({
+    x: PropTypes.number.isRequired,
+    y: PropTypes.number.isRequired,
+  }),
+};
+
+List.defaultProps = {
+  previewOffset: null,
 };
 
 export default List;

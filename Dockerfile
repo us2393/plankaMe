@@ -6,6 +6,8 @@ RUN apk -U upgrade \
 
 WORKDIR /app
 
+ENV npm_config_nodedir=/usr/local
+
 COPY server .
 
 RUN  npm install \
